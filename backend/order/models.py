@@ -21,6 +21,14 @@ ORDER_STATUS = (
     ('cancelled', 'cancelled'),
 )
 
+SHIPPING_STATUS = (
+    ('pending', 'pending'),
+    ('confirmed', 'confirmed'),
+    ('shipped', 'shipped'),
+    ('delivered', 'delivered'),
+    ('cancelled', 'cancelled'),
+)
+
 
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -66,3 +74,11 @@ class Coupon(models.Model):
 
     def __str__(self):
         return self.code
+
+class Shipping(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    status = models.CharField(choices=SHIPPING_STATUS, max_length=20)
+
+    def __str__(self):
+        return f"{self.order} - {self.product} - {self.status}"
