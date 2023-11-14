@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenVerifyView
 
 admin.site.site_header = "Ecommerce Business Platform"
 admin.site.site_title = "Your Admin Portal"
@@ -9,6 +10,8 @@ admin.site.index_title = "Welcome to Admin Portal"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path("accounts/", include("accounts.urls")),
     path("common/", include("common.urls")),
     path('inventory/', include("inventory.urls")),
