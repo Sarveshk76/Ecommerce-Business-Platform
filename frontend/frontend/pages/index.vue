@@ -21,6 +21,7 @@
       </v-row>
       <v-row>
         <p>offers</p>
+        <p>{{ token.token }}</p>
       </v-row>
       <v-row class="border border-primary mt-5">
         <v-col v-for="n in 4"
@@ -56,8 +57,11 @@
 </template>
 
 <script setup>
-import { useCounterStore } from '@/stores/counter'
+import { useTokenStore } from '@/stores/token'
 
-const counter = useCounterStore()
+// const counter = useCounterStore()
+
+const token = useTokenStore()
+
 
 </script>

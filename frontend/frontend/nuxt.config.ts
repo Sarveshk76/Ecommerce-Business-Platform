@@ -7,6 +7,9 @@ export default defineNuxtConfig({
     'vuetify/lib/styles/main.sass',
     "@mdi/font/css/materialdesignicons.css",
   ],
+  plugins: [
+    '~/plugins/vuetify',
+  ],
   modules: [
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
@@ -29,4 +32,5 @@ export default defineNuxtConfig({
       },
     },
   },
+
 });
