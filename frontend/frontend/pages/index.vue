@@ -20,7 +20,7 @@
         </v-carousel>
       </v-row>
       <v-row>
-        <p>offers</p>
+        <p>Todays' Offers</p>
         <p>{{ token.token }}</p>
       </v-row>
       <v-row class="border border-primary mt-5">
@@ -35,7 +35,7 @@
       </v-row>
 
       <v-row>
-        <p>Todays offers</p>
+        <p>New Arrivals</p>
       </v-row>
       <v-row>
         <v-col v-for="n in 4"
@@ -50,6 +50,16 @@
 
       <v-row>
         <p>Recently Viewed Products</p>
+      </v-row>
+      <v-row>
+        <v-col v-for="n in 4"
+        :key="n"
+        align="center"
+        >
+          <v-card border class="ma-2 pa-2" style="width: 250px; height: 300px;">
+            One of four columns
+          </v-card>
+        </v-col>
       </v-row>
       
     </v-container>

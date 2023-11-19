@@ -93,6 +93,7 @@ const loginCustomer = async ()=>{
     text.value = response.data.error
   }
   if (response.data.access){
+    console.log(response.data.access)
     snackbar.value = true
     text.value = "Logged in successfully!!"
   }
