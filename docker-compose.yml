@@ -38,14 +38,14 @@ services:
       - 5432
     hostname: db
 
-  # cache:
-  #   image: redis:7-alpine
-  #   restart: always
-  #   ports:
-  #     - '6379:6379'
-  #   command: redis-server --save 20 1 --loglevel warning --requirepass devtoolssecret
-  #   volumes: 
-  #     - cache:/data
+  cache:
+    image: redis:7-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass devtoolssecret
+    volumes: 
+      - cache:/data
 
   # pgadmin:
   #   image: dpage/pgadmin4:latest
@@ -64,5 +64,5 @@ services:
 volumes:
   db-data:
   # pgadmin-data:
-  # cache:
-  #   driver: local
+  cache:
+    driver: local
