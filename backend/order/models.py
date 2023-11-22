@@ -79,6 +79,11 @@ class Shipping(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     status = models.CharField(choices=SHIPPING_STATUS, max_length=20)
+    from_address = models.ForeignKey('common.Address', on_delete=models.CASCADE, related_name='from_address')
+    to_address = models.ForeignKey('common.Address', on_delete=models.CASCADE, related_name='to_address')
+    shipping_date = models.DateField(auto_now=True)
+    delivered_on = models.DateField(auto_now=True)
+
 
     def __str__(self):
         return f"{self.order} - {self.product} - {self.status}"

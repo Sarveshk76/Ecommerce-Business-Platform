@@ -29,7 +29,8 @@ class CategoryListView(ListAPIView):
 
 class SubCategoryListView(ListAPIView):
     serializer_class = CategorySerializer
-    # permission_classes = [IsAuthenticated]
+    authentication_classes = (JWTAuthentication,)
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self, *args, **kwargs):
         category = self.kwargs['id']

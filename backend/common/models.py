@@ -20,7 +20,7 @@ class Address(models.Model):
     is_primary = models.BooleanField(default=False)
 
     def __str__(self):
-        return str(self.user.email)
+        return str(self.address)
 
 
 class KYC(models.Model):
