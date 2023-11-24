@@ -12,7 +12,7 @@ DOC_TYPE = (
 
 
 class Address(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ManyToManyField(User, related_name='address')
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=20)
     state = models.CharField(max_length=20)

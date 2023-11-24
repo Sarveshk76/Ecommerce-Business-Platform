@@ -30,7 +30,7 @@ class RatingSerializer(serializers.ModelSerializer):
 class PaymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Payment
-        exclude = ['id',"user"]
+        fields = "__all__"
 
 
 class CommonSerializer(serializers.Serializer):

@@ -4,9 +4,16 @@ export const useTokenStore = defineStore('token', {
   state: () => {
     return { token: "" }
   },
-  // could also be defined as
-  // state: () => ({ count: 0 })
+  getters: {
+    getToken() {
+      return this.token
+    },
+  },
+  
   actions: {
+    setToken(token) {
+      this.token = token
+    },
     loginCustomer(){
 
     },
