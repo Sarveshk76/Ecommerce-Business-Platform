@@ -49,6 +49,7 @@
     </div>
     <v-snackbar
       v-model="snackbar"
+      :timeout="2000"
     >
       {{ text }}
 
@@ -70,32 +71,41 @@ definePageMeta({
 })
 import { ref } from 'vue'
 import axios from 'axios'
-import { useTokenStore } from '@/stores/token';
+
 const email = ref('')
 const password = ref('')
 const isEmail = useState('isEmail',()=> false)
 const isLoading = useState('isLoading',()=> true)
 const snackbar = useState('snackbar',()=> false)
 const text = useState('text',()=> '')
+
+snackbar.value = false
+text.value = ''
+
 setTimeout(() => {
   isLoading.value = false
 }, 1000);
-const token = useTokenStore()
 
 const loginCustomer = async ()=>{
-  axios.post('http://localhost:8001/accounts/api/v1/login/', {
+  await axios.post('http://localhost:8001/accounts/api/v1/login/', {
   email: email.value,
   password: password.value
 }).then((response) => {
-  
   if (response.data.error){
     snackbar.value = true
     text.value = response.data.error
   }
   if (response.data.access){
-    console.log(response.data.access)
-    snackbar.value = true
-    text.value = "Logged in successfully!!"
+    if(process.client) {
+      localStorage.setItem('token', response.data.access)
+      // console.log('Token: response ',response.data.access)
+    }
+      snackbar.value = true
+      text.value = "Logged in successfully!!"
+    
+    setTimeout(() => {
+      navigateTo('/')
+    }, 1000);
   }
   // navigateTo('/', {'token': response.data.access})
 }).catch((error) => {

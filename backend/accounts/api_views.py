@@ -1,5 +1,7 @@
 from django.contrib.auth import get_user_model, authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from .serializers import UserSerializer
 from rest_framework import status
 from rest_framework import permissions
 from rest_framework.response import Response
@@ -68,3 +70,17 @@ class LoginAPIView(APIView):
 
             return Response({"user":user.email, 'refresh': str(refresh),
                 'access': str(refresh.access_token)}, status=status.HTTP_200_OK)
+        
+
+class ProfileAPIView(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    authentication_classes = (JWTAuthentication,)
+    serializer_class = UserSerializer
+
+    def get(self, request):
+        user = self.request.user
+        serializer = self.serializer_class(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+        # return Response({"user":request.user}, status=status.HTTP_200_OK)
+    
+    

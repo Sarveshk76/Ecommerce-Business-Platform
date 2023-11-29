@@ -43,7 +43,6 @@ class OrderSerializer(serializers.ModelSerializer):
         cart_data = validated_data.pop('cart')
         address_data = validated_data.pop('address')
         payment_data = validated_data.pop('payment')
-        coupon_data = cart_data.pop('coupon')
         cart = Cart.objects.create(**cart_data)
         address = Address.objects.create(**address_data)
         payment = Payment.objects.create(**payment_data)
