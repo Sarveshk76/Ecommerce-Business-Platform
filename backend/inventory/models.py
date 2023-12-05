@@ -30,20 +30,17 @@ class SubCategory(models.Model):
 
 
 class Product(models.Model):
-    category = models.ForeignKey(Category, related_name="products_category+",
-                                 on_delete=models.CASCADE)
     subcategory = models.ForeignKey(SubCategory,
                                     related_name="products_category+",
                                     on_delete=models.CASCADE)
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=100)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to="product/images/", blank=True)
-    status = models.CharField(max_length=20)
-    rating = models.IntegerField()
-    review = models.TextField()
-    stock = models.IntegerField()
+    rating = models.IntegerField(null=True, blank=True)
+    review = models.TextField(null=True, blank=True)
+    stock = models.IntegerField(default=0)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
