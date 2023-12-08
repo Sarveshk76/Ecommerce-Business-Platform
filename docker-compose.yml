@@ -46,22 +46,22 @@ services:
     volumes: 
       - cache:/data
 
-  pgadmin:
-    image: dpage/pgadmin4:latest
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: devsecret
-      PGADMIN_LISTEN_PORT: 80
-    ports:
-      - "8085:80"
-    volumes:
-      - pgadmin-data:/var/lib/pgadmin
-    links:
-      - "db:pgisql-server"
+  # pgadmin:
+  #   image: dpage/pgadmin4:latest
+  #   restart: always
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: admin@gmail.com
+  #     PGADMIN_DEFAULT_PASSWORD: devsecret
+  #     PGADMIN_LISTEN_PORT: 80
+  #   ports:
+  #     - "8085:80"
+  #   volumes:
+  #     - pgadmin-data:/var/lib/pgadmin
+  #   links:
+  #     - "db:pgisql-server"
 
 volumes:
   db-data:
-  pgadmin-data:
+  # pgadmin-data:
   cache:
     driver: local

@@ -30,17 +30,22 @@ class DashboardSerializer(Serializer):
     recently_viewed_products = serializers.SerializerMethodField()
 
     def get_carousel(self, obj):
-        obj = ["Carousel 1", "Carousel 2", "Carousel 3"]
+        obj = ["https://drive.google.com/uc?id=1lkz6JI7dYWVoEv0R8YUe7X4uvHcerke4",
+               "https://drive.google.com/uc?id=1w0W83N55Kn2Cb_sAZdugP7YVI_Js7ZAo",
+               "https://drive.google.com/uc?id=1iLHAdFzJz9sZ_xiavbvKc1x8skdnrcGB"]
         return obj
 
     def get_todays_offers(self, obj):
-        obj = "Todays Offers"
-        return obj
+        obj = Product.objects.all().order_by('-id')[:5]
+        serializer = ProductSerializer(obj, many=True)
+        return serializer.data
     
     def get_recently_viewed_products(self, obj):
-        obj = "Recently Viewed Products"
-        return obj
+        obj = Product.objects.all().order_by('-id')[5:11]
+        serializer = ProductSerializer(obj, many=True)
+        return serializer.data
     
     def get_new_arrivals(self, obj):
-        obj = "New Arrivals"
-        return obj
+        obj = Product.objects.all().order_by('-id')[10:16]
+        serializer = ProductSerializer(obj, many=True)
+        return serializer.data
