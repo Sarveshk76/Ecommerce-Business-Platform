@@ -14,16 +14,16 @@ A user-friendly and feature-rich e-commerce platform that will provide our custo
 - [x] User Authorization
 - [x] User Profile
 - [x] Product Management
-- [x] Shopping Cart
-- [x] Order Management
-- [x] Payments Management
-- [x] Shipping
-- [x] Search
-- [x] Rating and Review
+- [ ] Shopping Cart
+- [ ] Order Management
+- [ ] Payments Management
+- [ ] Shipping
+- [ ] Search
+- [ ] Rating and Review
 - [ ] Analytics
 - [ ] Reporting
 - [ ] Customer Support
-- [x] Admin Dashboard
+- [ ] Admin Dashboard
 - [ ] Seller Dashboard
 - [ ] Delivery Dashboard
 
