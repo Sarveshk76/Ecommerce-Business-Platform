@@ -14,11 +14,11 @@ A user-friendly and feature-rich e-commerce platform that will provide our custo
 - [x] User Authorization
 - [x] User Profile
 - [x] Product Management
-- [x] Shopping Cart
-- [x] Order Management
-- [x] Payments Management
-- [x] Shipping
-- [x] Search
+- [ ] Shopping Cart
+- [ ] Order Management
+- [ ] Payments Management
+- [ ] Shipping
+- [ ] Search
 - [ ] Rating and Review
 - [ ] Analytics
 - [ ] Reporting
