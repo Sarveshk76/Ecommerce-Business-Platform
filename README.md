@@ -4,7 +4,7 @@
 A user-friendly and feature-rich e-commerce platform that will provide our customers with the best possible shopping experience.
 
 ### System Architecture
-![image](https://github.com/Sarveshk76/Ecommerce-Business-Platform/assets/78719645/a367a821-1bc2-42e0-9336-c056f0469b10)
+![image](https://github.com/Sarveshk76/Ecommerce-Business-Platform/blob/main/sys_arch.png?raw=true)
 
 <!-- ### Database Schema -->
 
