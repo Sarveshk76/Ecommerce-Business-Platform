@@ -13,7 +13,7 @@ DOC_TYPE = (
 
 class Address(models.Model):
     user = models.ManyToManyField(User, related_name='address')
-    address = models.CharField(max_length=100)
+    street_address = models.CharField(max_length=100)
     city = models.CharField(max_length=20)
     state = models.CharField(max_length=20)
     pincode = models.CharField(max_length=6)
@@ -40,19 +40,9 @@ class BankDetail(models.Model):
     account_number = models.CharField(max_length=20)
     ifsc_code = models.CharField(max_length=20)
     bank_name = models.CharField(max_length=50)
-    branch_name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.account_holder_name
-
-
-class Rating(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    rating = models.IntegerField()
-    rated_on = models.DateField(auto_now=True)
-
-    def __str__(self):
-        return self.rating
 
 
 class Payment(models.Model):

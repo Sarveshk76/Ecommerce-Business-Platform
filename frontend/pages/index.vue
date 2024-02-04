@@ -1,58 +1,82 @@
 <template>
   <div>
     <v-container>
-      <v-row>
+      <v-row class="my-5">
         <v-carousel>
           <v-carousel-item
             v-for="(item,i) in carousels"
             :key="i"
-            src="item.src"
+            :src="item"
             cover
           ></v-carousel-item>
 
         </v-carousel>
+        
       </v-row>
-      <v-row>
-        <p>Todays' Offers</p>
+      <v-row class="mt-5">
+        <p class="text-h6 font-weight-bold">Todays' Offers</p>
       </v-row>
-      <v-row class="border border-primary mt-5">
-        <v-col v-for="n in 4"
-        :key="n"
-        align="center"
-        >
-          <v-card border class="ma-2 pa-2" style="width: 250px; height: 300px;">
-            One of four columns
+     
+      <v-layout class="overflow-x-auto scrollbar-hidden border pa-3">
+        
+       <div v-if="todays_offers.length != 0">
+        <div class="border m-2" align="center" xs12 sm6 md3 v-for="(item,i) in todays_offers" :key="i" >
+          <nuxt-link :to="{path:'todays-offers/'+item.name.slice(0,50)+'/', 
+                           query:{
+                            'id': item.id,
+                            'name': item.name,
+                            'desc': item.description,
+                            'price': item.price,
+                            'seller': item.seller.venture,
+                            'rating': item.rating,
+                            'reviews': item.reviews,
+                            'stock': item.stock,}
+                           }">
+          <v-card height="300" width="220">
+            <v-img src="/images/no_product_image.jpg" height="200px"></v-img>
+            <p>{{ item.name }}</p>
           </v-card>
-        </v-col>
-      </v-row>
+          </nuxt-link>
+        </div>
+      </div>
+      <div v-else>
+        <p> No Products Available!!</p>
+      </div>
+      </v-layout>
 
-      <v-row>
-        <p>New Arrivals</p>
+      <v-row class="mt-5">
+        <p class="text-h6 font-weight-bold">New Arrivals</p>
       </v-row>
-      <v-row>
-        <v-col v-for="n in 4"
-        :key="n"
-        align="center"
-        >
-          <v-card border class="ma-2 pa-2" style="width: 250px; height: 300px;">
-            One of four columns
+      <v-layout class="overflow-x-auto scrollbar-hidden border pa-3">
+       <div v-if="new_arrivals.length != 0">
+        <div class="border m-2" align="center" xs12 sm6 md3 v-for="(item,i) in new_arrivals" :key="i" >
+          <v-card height="300" width="220">
+            <v-img src="/images/no_product_image.jpg" height="200px"></v-img>
+            <p>{{ item.name }}</p>
           </v-card>
-        </v-col>
-      </v-row>
+        </div>
+      </div>
+      <div v-else>
+        <p>No Products Available!!</p>
+      </div>
+      </v-layout>
 
-      <v-row>
-        <p>Recently Viewed Products</p>
+      <v-row class="mt-5">
+        <p class="text-h6 font-weight-bold">Recently Viewed Products</p>
       </v-row>
-      <v-row>
-        <v-col v-for="n in 4"
-        :key="n"
-        align="center"
-        >
-          <v-card border class="ma-2 pa-2" style="width: 250px; height: 300px;">
-            One of four columns
+      <v-layout class="overflow-x-auto scrollbar-hidden border pa-3">
+        <div v-if="recently_viewed_products.length != 0">
+        <div class="border m-2" align="center" xs12 sm6 md3 v-for="(item,i) in recently_viewed_products" :key="i" >
+          <v-card height="300" width="220">
+            <v-img src="/images/no_product_image.jpg" height="200px"></v-img>
+            <p>{{ item.name }}</p>
           </v-card>
-        </v-col>
-      </v-row>
+        </div>
+      </div>
+      <div v-else>
+        <p>No Products Available!!</p>
+      </div>
+      </v-layout>
       
     </v-container>
   </div>
@@ -68,29 +92,34 @@ const recently_viewed_products = useState("recently_viewed_products", () => [], 
 
 async function getDashcoard()  {
       if(process.client) {
-        var token = localStorage.getItem('token')
+        // var token = localStorage.getItem('token')
         // localStorage.setItem('token', "")
       }
   
-    await axios.get('http://localhost:8001/inventory/dashboard/', {headers: {
-      'Authorization': `JWT ${token}`
-    }}).
+    await axios.get('http://localhost:8001/inventory/dashboard/').
     
   then((response) => {
-    // console.log(response.data);
-    // carousels.value = response.data.carousels
-    // todays_offers.value = response.data.todays_offers
-    // new_arrivals.value = response.data.new_arrivals
-    // recently_viewed_products.value = response.data.recently_viewed_products
-    console.log(typeof(carousels))
-    console.log(typeof(todays_offers))
-    console.log(typeof(new_arrivals))
-    console.log(typeof(recently_viewed_products))
+    carousels.value = response.data.data.carousel
+    todays_offers.value = response.data.data.todays_offers
+    new_arrivals.value = response.data.data.new_arrivals
+    recently_viewed_products.value = response.data.data.recently_viewed_products
   }).catch((error) => {
     console.log(error);
   });
     }
     getDashcoard();
+  
 
 
 </script>
+<style>
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge add Firefox */
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none; /* Firefox */
+}
+</style>

@@ -56,8 +56,6 @@ class Order(models.Model):
     address = models.ForeignKey('common.Address', on_delete=models.CASCADE)
     total = models.DecimalField(max_digits=10, decimal_places=2)
     ordered_on = models.DateField(auto_now=True)
-    rating = models.IntegerField()
-    review = models.TextField()
     payment = models.ForeignKey('common.Payment', on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
 
@@ -73,7 +71,7 @@ class Coupon(models.Model):
     valid_till = models.DateField()
 
     def __str__(self):
-        return self.code
+        return f"{self.code} - {self.valid_from} - {self.valid_till}"
 
 class Shipping(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
@@ -81,7 +79,7 @@ class Shipping(models.Model):
     status = models.CharField(choices=SHIPPING_STATUS, max_length=20)
     from_address = models.ForeignKey('common.Address', on_delete=models.CASCADE, related_name='from_address')
     to_address = models.ForeignKey('common.Address', on_delete=models.CASCADE, related_name='to_address')
-    shipping_date = models.DateField(auto_now=True)
+    shipped_on = models.DateField(auto_now=True)
     delivered_on = models.DateField(auto_now=True)
 
 

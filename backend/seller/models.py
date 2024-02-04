@@ -10,7 +10,6 @@ class Seller(models.Model):
     is_gst_registered = models.BooleanField(default=True)
     gstin_no = models.CharField(max_length=50, blank=True)
     joined_on = models.DateField(auto_now=True)
-    status = models.CharField(max_length=20)
     is_active = models.BooleanField(default=False)
 
     def __str__(self):

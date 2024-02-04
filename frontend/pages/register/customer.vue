@@ -12,30 +12,25 @@
           <v-card-title>
             Register
           </v-card-title>
-          <div class="d-flex justify-content-start mx-3">
-            <v-btn icon="mdi-arrow-left" color="teal" v-if="isEmail" @click="isEmail = false"></v-btn>
-          </div>
           
-          <v-card-item v-if="isEmail == false">
+          <v-card-item>
             <v-text-field
               label="Email"
               varient="outlined"
               v-model="email"
             ></v-text-field>
-          </v-card-item>
-          <v-card-item v-if="isEmail == true">
             <v-text-field
               label="Password"
               varient="outlined"
               v-model="password"
+              :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+              @click:append-inner="visible = !visible"
+              :type="visible ? 'text' : 'password'"
             ></v-text-field>
           </v-card-item>
 
           <v-card-actions class="d-flex align-items-center justify-content-center">
-            <v-btn v-if="isEmail == false" @click="isEmail = !isEmail" variant="outlined">
-              Continue
-            </v-btn>
-            <v-btn v-if="isEmail == true" @click="registerCustomer" variant="outlined">
+            <v-btn @click="registerCustomer" variant="outlined">
               Register
             </v-btn>
           </v-card-actions>
@@ -78,7 +73,7 @@ import { ref } from 'vue'
 import axios from 'axios'
 const email = ref('')
 const password = ref('')
-const isEmail = useState('isEmail',()=> false)
+const visible = useState('false', ()=>false)
 const isLoading = useState('isLoading',()=> true)
 const snackbar = useState('snackbar',()=> false)
 const text = useState('text',()=> '')

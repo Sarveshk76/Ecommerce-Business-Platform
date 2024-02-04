@@ -19,11 +19,11 @@ A user-friendly and feature-rich e-commerce platform that will provide our custo
 - [x] Payments Management
 - [x] Shipping
 - [x] Search
-- [x] Rating and Review
+- [ ] Rating and Review
 - [ ] Analytics
 - [ ] Reporting
 - [ ] Customer Support
-- [x] Admin Dashboard
+- [ ] Admin Dashboard
 - [ ] Seller Dashboard
 - [ ] Delivery Dashboard
 

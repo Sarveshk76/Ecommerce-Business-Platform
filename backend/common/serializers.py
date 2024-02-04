@@ -1,5 +1,4 @@
 from .models import *
-from django.core.serializers import serialize
 from rest_framework import serializers
 
 
@@ -21,12 +20,6 @@ class BankDetailSerializer(serializers.ModelSerializer):
         exclude = ['id',"user"]
 
 
-class RatingSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Rating
-        exclude = ['id',"user"]
-
-
 class PaymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Payment
@@ -38,7 +31,6 @@ class CommonSerializer(serializers.Serializer):
     address = serializers.SerializerMethodField()
     kyc = serializers.SerializerMethodField()
     bank_detail = serializers.SerializerMethodField()
-    rating = serializers.SerializerMethodField()
     
     def get_user(self, obj):
         request = self.context.get('request', None)
@@ -63,9 +55,4 @@ class CommonSerializer(serializers.Serializer):
             return BankDetailSerializer(bank_detail).data
         return None
     
-    def get_rating(self, obj):
-        rating = Rating.objects.filter(user=self.get_user(obj)["id"]).first()
-        if rating:
-            return RatingSerializer(rating).data
-        return None
     
