@@ -1,4 +1,4 @@
-from .models import (Category, Product, SubCategory,)
+from .models import (Category, Product, SubCategory, Images)
 from seller.models import Seller
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer, Serializer
@@ -22,8 +22,14 @@ class SellerSerializer(ModelSerializer):
         model = Seller
         fields = "__all__"
 
+class ImagesSerializer(ModelSerializer):
+    class Meta:
+        model = Images
+        fields = ('url',)
+
 class ProductSerializer(ModelSerializer):
     seller = SellerSerializer()
+    images = ImagesSerializer(many=True)
     class Meta:
         model = Product
         fields = "__all__"
@@ -42,16 +48,16 @@ class DashboardSerializer(Serializer):
         return obj
 
     def get_todays_offers(self, obj):
-        obj = Product.objects.all().select_related('seller').order_by('-id')[:5]
+        obj = Product.objects.filter(todays_offer=True).select_related('seller').order_by('-id')[:5]
         serializer = ProductSerializer(obj, many=True)
         return serializer.data
     
     def get_recently_viewed_products(self, obj):
-        obj = Product.objects.all().order_by('-id')[5:11]
+        obj = Product.objects.filter(recently_viewed=True).order_by('-id')[:5]
         serializer = ProductSerializer(obj, many=True)
         return serializer.data
     
     def get_new_arrivals(self, obj):
-        obj = Product.objects.all().order_by('-id')[10:16]
+        obj = Product.objects.filter(new_arrival=True).order_by('-id')[:5]
         serializer = ProductSerializer(obj, many=True)
         return serializer.data

@@ -30,6 +30,9 @@ class SubCategory(models.Model):
 class Images(models.Model):
     url = models.URLField(max_length=2048)
 
+    def __str__(self):
+        return self.url
+
 class Product(models.Model):
     subcategory = models.ForeignKey(SubCategory,
                                     related_name="products_category",

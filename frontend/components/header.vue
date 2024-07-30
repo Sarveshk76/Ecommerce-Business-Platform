@@ -50,16 +50,17 @@
           <v-icon>mdi-account-outline</v-icon>
         </v-btn>
       </template>
-      <v-list>
+      <v-list v-if="authenticated">
         <v-list-item
-          v-if="authenticated"
           v-for="(item, index) in items"
           :key="index"
           :value="index"
         >
           <v-list-item-title @click=item.onClick>{{ item.title }}</v-list-item-title>
         </v-list-item>
-        <v-list-item v-else class="text-center"> 
+        </v-list>
+        <v-list v-else>
+        <v-list-item  class="text-center"> 
           <v-btn color="yellow">Sign In</v-btn>
           <br>
           <p>new customer?</p>
